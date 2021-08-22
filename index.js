@@ -6,6 +6,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 const users = {};
+var Port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
@@ -39,6 +40,6 @@ io.on("connection", (socket) => {
     io.emit("chat message", users[socket.id].UserName + ":" + msg);
   });
 });
-server.listen(3000, () => {
-  console.log("listening on *:3000");
+server.listen(Port, () => {
+  console.log("listening on *:3000 or env.port");
 });
